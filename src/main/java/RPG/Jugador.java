@@ -4,6 +4,7 @@ import MiniJuego.MiniJuego;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
@@ -105,6 +106,14 @@ public class Jugador extends Personaje {
         System.out.println("JSON file overwritten successfully!");
 
 
+    }
+    public static boolean existeJugadorCreado(){
+        try {
+            File archivo = new File("src/main/resources/jugador.json");
+            return archivo.exists() && archivo.length() > 0;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

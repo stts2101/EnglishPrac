@@ -7,7 +7,7 @@ import java.util.Random;
 public abstract class Personaje {
     private int maxHp;
     private int hpActual;
-    private int Lv;
+    private int lv;
     private int defensa;
     private int critico;
     private int ataque;
@@ -18,7 +18,7 @@ public abstract class Personaje {
     public Personaje(int maxHp, int hpActual, int lv, int defensa, int critico, int ataque) {
         this.maxHp = maxHp;
         this.hpActual = hpActual;
-        Lv = lv;
+        this.lv = lv;
         this.defensa = defensa;
         this.critico = critico;
         this.ataque = ataque;
@@ -62,11 +62,11 @@ public abstract class Personaje {
     }
 
     public int getLv() {
-        return Lv;
+        return lv;
     }
 
     public void setLv(int lv) {
-        Lv = lv;
+        this.lv = lv;
     }
 
     public int getDefensa() {

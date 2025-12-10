@@ -45,6 +45,7 @@ public class Combate {
              if(enemigo.isDead()){
                  setVictoriaJugador(true);
                  setFinCombate(true);
+                 enemigo.setDerrotado(true);
              }
          }
     }

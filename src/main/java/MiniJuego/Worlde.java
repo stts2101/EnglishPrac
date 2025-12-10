@@ -13,10 +13,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Worlde extends MiniJuego{
-    private char[] palabra;
-    private char[] respWordle;
-    private String respuesta;
-    private String palabraInicialWorlde;
+        private char[] palabra;
+        private char[] respWordle;
+        private String respuesta;
+        private String palabraInicialWorlde;
     public boolean elegirPalabra(){
         Gson gson = new Gson();
         String json = "";

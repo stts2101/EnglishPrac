@@ -4,9 +4,7 @@ import com.google.genai.Client;
 import com.google.genai.types.GenerateContentConfig;
 import com.google.genai.types.GenerateContentResponse;
 
-/**
- * Implementation of the GeminiTextGenerator using the Google GenAI SDK.
- */
+
 public class GeminiTextGeneratorImpl implements GeminiTextGenerator {
 
     private final Client client;

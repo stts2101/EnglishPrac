@@ -2,6 +2,7 @@ package RPG;
 
 public class Enemigo extends Personaje {
     private String nombreEnemigo;
+    private boolean derrotado;
     public Enemigo(String nombreEnemigo, int maxHp, int hpActual, int lv, int defensa, int critico, int ataque) {
         super(maxHp, hpActual, lv, defensa, critico, ataque);
         this.nombreEnemigo = nombreEnemigo;
@@ -26,5 +27,13 @@ public class Enemigo extends Personaje {
     @Override
     public boolean isDead() {
         return super.isDead();
+    }
+
+    public boolean isDerrotado() {
+        return derrotado;
+    }
+
+    public void setDerrotado(boolean derrotado) {
+        this.derrotado = derrotado;
     }
 }
