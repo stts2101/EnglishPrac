@@ -12,6 +12,9 @@ public abstract class Personaje {
     private int critico;
     private int ataque;
 
+    public Personaje() {
+    }
+
     public Personaje(int maxHp, int hpActual, int lv, int defensa, int critico, int ataque) {
         this.maxHp = maxHp;
         this.hpActual = hpActual;

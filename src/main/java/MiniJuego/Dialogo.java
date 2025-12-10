@@ -1,14 +1,19 @@
 package MiniJuego;
 
+import Api.GeminiTextGenerator;
+import Api.GeminiTextGeneratorImpl;
 import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
 public class Dialogo extends MiniJuego{
     private String contexto;
     private String respuesta;
+    private String contextoRespuesta;
+    private boolean juegoGanado;
 
     public Dialogo(){
         Gson gson = new Gson();
@@ -19,6 +24,12 @@ public class Dialogo extends MiniJuego{
             System.out.println("Error al leer el contexto.");
         }
         this.contexto = gson.fromJson(json,String.class);
+        try {
+            json = Files.readString(Paths.get("src/main/resources/contextoRespuesta.json"));
+        }catch (IOException e){
+            System.out.println("Error al leer el contexto.");
+        }
+        this.contextoRespuesta = gson.fromJson(json,String.class);
 
     }
 
@@ -28,6 +39,35 @@ public class Dialogo extends MiniJuego{
 
     @Override
     public boolean play() {
-        return super.play();
+        GeminiTextGenerator gemini1 = new GeminiTextGeneratorImpl();
+        String toJugador = "";
+        try {
+            toJugador =  gemini1.generateText(contexto);
+        }catch (Exception e){}
+        System.out.println(toJugador);
+        String resp = recivirResp();
+        System.out.println(toJugador + "    ====     "+ resp);
+        String contexto2 = "\"" + resp + "\" " + contextoRespuesta;
+        try {
+            this.respuesta =  gemini1.generateText(contexto2);
+        }catch (Exception e){}
+        this.juegoGanado = respuesta.toLowerCase().startsWith("c");
+        System.out.println(respuesta);
+        System.out.println("Juego Ganado?: " + juegoGanado);
+        //is this answer correct (not counting spelling) in the previous context, don't count similar to "I don't know" or "yes", "no". Anser with one word (correct or incorrect) a line jump and 1 line explaining why
+        return juegoGanado;
+    }
+    public String recivirResp(){
+        Scanner teclado = new Scanner(System.in);
+        String resp = teclado.nextLine();
+        return resp;
+    }
+
+    public String getRespuesta() {
+        return respuesta;
+    }
+
+    public String getContextoRespuesta() {
+        return contextoRespuesta;
     }
 }
