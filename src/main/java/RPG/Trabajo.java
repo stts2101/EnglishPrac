@@ -1,5 +1,7 @@
 package RPG;
 
+import com.google.gson.Gson;
+
 public class Trabajo {
     private double hpMod;
     private double defensaMod;
@@ -55,12 +57,7 @@ public class Trabajo {
 
     @Override
     public String toString() {
-        return "Trabajo{" +
-                "hpMod=" + hpMod +
-                ", defensaMod=" + defensaMod +
-                ", ataqueMod=" + ataqueMod +
-                ", criticoMod=" + criticoMod +
-                ", tipoTrabajo='" + tipoTrabajo + '\'' +
-                '}';
+        Gson gson = new Gson();
+        return gson.toJson(this);
     }
 }

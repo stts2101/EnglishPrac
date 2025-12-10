@@ -1,5 +1,9 @@
 package RPG;
 
+import com.google.gson.Gson;
+
+import java.util.Random;
+
 public class Jugador extends Personaje {
     private int experiencia;
     private int sgteNivel;
@@ -11,12 +15,18 @@ public class Jugador extends Personaje {
     }
 
     @Override
+    public int atacar() {
+
+    }
+
+    @Override
+    public int calcularDamage(int n) {
+        return super.calcularDamage(n);
+    }
+
+    @Override
     public String toString() {
-        return "Jugador{" +
-                "experiencia=" + experiencia +
-                ", sgteNivel=" + sgteNivel +
-                ", " + super.toString() +
-                ", trabajo=" + trabajo +
-                '}';
+        Gson gson = new Gson();
+        return gson.toJson(this);
     }
 }

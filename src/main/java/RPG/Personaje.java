@@ -1,5 +1,9 @@
 package RPG;
 
+import com.google.gson.Gson;
+
+import java.util.Random;
+
 public abstract class Personaje {
     private int maxHp;
     private int hpActual;
@@ -17,15 +21,72 @@ public abstract class Personaje {
         this.ataque = ataque;
     }
 
-    public void atacar(){}
+    public int atacar(){
+        Random random = new Random();
+        boolean crit = random.nextInt(100) < critico;
+        if (crit){
+            return (int) ataque+(ataque/2);
+        }else
+            return ataque;
+    }
+    public int calcularDamage(int n){
+        double m = n - (defensa*(Math.random()) );
+        int endDamage = (int) m;
+        this.setHpActual( hpActual - endDamage );
+        return  endDamage;
+    }
+
+    public int getMaxHp() {
+        return maxHp;
+    }
+
+    public void setMaxHp(int maxHp) {
+        this.maxHp = maxHp;
+    }
+
+    public int getHpActual() {
+        return hpActual;
+    }
+
+    public void setHpActual(int hpActual) {
+        this.hpActual = hpActual;
+    }
+
+    public int getLv() {
+        return Lv;
+    }
+
+    public void setLv(int lv) {
+        Lv = lv;
+    }
+
+    public int getDefensa() {
+        return defensa;
+    }
+
+    public void setDefensa(int defensa) {
+        this.defensa = defensa;
+    }
+
+    public int getCritico() {
+        return critico;
+    }
+
+    public void setCritico(int critico) {
+        this.critico = critico;
+    }
+
+    public int getAtaque() {
+        return ataque;
+    }
+
+    public void setAtaque(int ataque) {
+        this.ataque = ataque;
+    }
 
     @Override
     public String toString() {
-        return "maxHp=" + maxHp +
-                ", hpActual=" + hpActual +
-                ", Lv=" + Lv +
-                ", defensa=" + defensa +
-                ", critico=" + critico +
-                ", ataque=" + ataque ;
+        Gson gson = new Gson();
+        return  gson.toJson(this);
     }
 }
