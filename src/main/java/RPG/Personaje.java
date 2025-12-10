@@ -19,6 +19,13 @@ public abstract class Personaje {
 
     public void atacar(){}
 
-
-
+    @Override
+    public String toString() {
+        return "maxHp=" + maxHp +
+                ", hpActual=" + hpActual +
+                ", Lv=" + Lv +
+                ", defensa=" + defensa +
+                ", critico=" + critico +
+                ", ataque=" + ataque ;
+    }
 }
