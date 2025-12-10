@@ -1,5 +1,6 @@
 package RPG;
 
+import MiniJuego.MiniJuego;
 import com.google.gson.Gson;
 
 import java.util.Random;
@@ -38,5 +39,8 @@ public class Jugador extends Personaje {
     @Override
     public boolean isDead() {
         return super.isDead();
+    }
+    public void calcularNivel(MiniJuego miniJuego){
+
     }
 }

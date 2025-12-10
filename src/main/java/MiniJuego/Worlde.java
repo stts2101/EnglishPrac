@@ -1,26 +1,36 @@
 package MiniJuego;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.net.Proxy;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Worlde extends MiniJuego{
     private char[] palabra;
     private char[] respWordle;
     private String respuesta;
-
-    public static void main(String[] args) {
-        Worlde w1 = new Worlde();
-        boolean x;
-        int intentos = 0;
-        do {
-            x = w1.play();
-            intentos++;
-        }while (!x);
-        System.out.println("Intentos: "+intentos);
-
-
-
+    private String palabraInicialWorlde;
+    public boolean elegirPalabra(){
+        Gson gson = new Gson();
+        String json = "";
+        try {
+            json = Files.readString(Paths.get( "src/main/resources/bancoPalabras.json" ));
+        }catch (IOException io){}
+        Type type = new TypeToken<List<String>>(){}.getType();
+        List<String> bancoPalabras = gson.fromJson(json,type);
+        int randomNumber = (int) (Math.random() * 50);
+        this.palabraInicialWorlde = bancoPalabras.get(randomNumber);
+        return true;
     }
+
+
     @Override
     public boolean play(){
         // select a random word.
@@ -77,5 +87,9 @@ public class Worlde extends MiniJuego{
 
     public void setRespuesta(String respuesta) {
         this.respuesta = respuesta;
+    }
+
+    public String getPalabraInicialWorlde() {
+        return palabraInicialWorlde;
     }
 }
