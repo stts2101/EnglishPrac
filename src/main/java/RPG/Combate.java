@@ -9,6 +9,10 @@ public class Combate {
         this.empiezaJugador = Math.random() < 0.5;
     }
 
+
+
+
+
     // selctorDeTurno al.
     // iniciarBatalla
     // finBatalla

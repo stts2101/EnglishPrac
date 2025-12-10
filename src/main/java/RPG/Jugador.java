@@ -16,12 +16,17 @@ public class Jugador extends Personaje {
 
     @Override
     public int atacar() {
-
+        return super.atacar();
     }
 
     @Override
     public int calcularDamage(int n) {
         return super.calcularDamage(n);
+    }
+
+    @Override
+    public boolean evadir() {
+        return super.evadir();
     }
 
     @Override

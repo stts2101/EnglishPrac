@@ -35,6 +35,9 @@ public abstract class Personaje {
         this.setHpActual( hpActual - endDamage );
         return  endDamage;
     }
+    public boolean evadir(){
+        return Math.random()<50;
+    }
 
     public int getMaxHp() {
         return maxHp;
