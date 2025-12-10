@@ -22,4 +22,9 @@ public class Enemigo extends Personaje {
     public boolean evadir() {
         return super.evadir();
     }
+
+    @Override
+    public boolean isDead() {
+        return super.isDead();
+    }
 }

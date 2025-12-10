@@ -34,4 +34,9 @@ public class Jugador extends Personaje {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
+
+    @Override
+    public boolean isDead() {
+        return super.isDead();
+    }
 }

@@ -38,6 +38,9 @@ public abstract class Personaje {
     public boolean evadir(){
         return Math.random()<50;
     }
+    public boolean isDead(){
+        return hpActual<=0;
+    }
 
     public int getMaxHp() {
         return maxHp;
