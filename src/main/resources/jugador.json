@@ -1,0 +1,17 @@
+{
+  "experiencia": 0,
+  "sgteNivel": 70,
+  "trabajo": {
+    "hpMod": 1.0,
+    "defensaMod": 1.0,
+    "ataqueMod": 1.25,
+    "criticoMod": 2.0,
+    "tipoTrabajo": "cazador"
+  },
+  "maxHp": 23,
+  "hpActual": 3,
+  "Lv": 3,
+  "defensa": 3,
+  "critico": 3,
+  "ataque": 3
+}
