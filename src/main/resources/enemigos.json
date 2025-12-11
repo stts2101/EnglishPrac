@@ -1,0 +1,10 @@
+{
+  "nombreEnemigo": "goblino",
+  "derrotado": false,
+  "maxHp": 30,
+  "hpActual": 30,
+  "lv": 3,
+  "defensa": 10,
+  "critico": 40,
+  "ataque": 30
+}

@@ -6,7 +6,7 @@ public class Trabajo {
     private double hpMod;
     private double defensaMod;
     private double ataqueMod;
-    private double criticoMod;
+    private int criticoMod;
     private String tipoTrabajo;
 
 
@@ -15,18 +15,18 @@ public class Trabajo {
         switch (tipoTrabajo.toLowerCase()){
             case "guerrero":
                 this.hpMod = 1.25;
-                this.defensaMod = 1;
+                this.defensaMod = 1.1;
                 this.ataqueMod = 1.60;
                 this.criticoMod = 0;
                 break;
             case "guardian":
                 this.hpMod = 1.25;
                 this.defensaMod = 1.60;
-                this.ataqueMod = 1;
+                this.ataqueMod = 1.1;
                 this.criticoMod = 0;
                 break;
             case "cazador":
-                this.hpMod = 1;
+                this.hpMod = 1.1;
                 this.defensaMod = 1;
                 this.ataqueMod = 1.25;
                 this.criticoMod = 2;
@@ -47,7 +47,7 @@ public class Trabajo {
         return ataqueMod;
     }
 
-    public double getCriticoMod() {
+    public int getCriticoMod() {
         return criticoMod;
     }
 

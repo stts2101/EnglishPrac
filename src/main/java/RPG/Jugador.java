@@ -66,54 +66,28 @@ public class Jugador extends Personaje {
         this.experiencia += 40;
         this.sgteNivel -= 40;
         if (sgteNivel<=0){
+            int exceso = Math.abs(this.sgteNivel );
             int n = this.getLv();
             this.setLv(n+1);
-            this.sgteNivel = (sgteNivel<0)? 70+sgteNivel : 70;
+            this.sgteNivel = 70 - exceso;
+            subirNivel();
         }
-        guardarJson();
+        JugadorRepositorio.guardarJson(this);
 
     }
     private void subirNivel() {
         // Mejorar estadísticas al subir de nivel
-        this.setMaxHp(this.getMaxHp() + 10);
+        this.setMaxHp( (int) Math.round( this.getMaxHp() * trabajo.getHpMod() ));
         this.setHpActual(this.getMaxHp()); // Curar completamente
-        this.setAtaque(this.getAtaque() + 2);
-        this.setDefensa(this.getDefensa() + 1);
+        this.setAtaque(  (int) Math.round( this.getAtaque() * trabajo.getAtaqueMod() )   );
+        this.setDefensa(  (int) Math.round( this.getDefensa() * trabajo.getDefensaMod() )   );
+        this.setCritico( this.getCritico() + trabajo.getCriticoMod() );
     }
 
-    public void guardarJson(){
-         Gson gson = new GsonBuilder()
-                .setPrettyPrinting()  // For nicely formatted JSON
-                .create();
-            // Create or overwrite the JSON file
-        FileWriter writer = null;
-        try {
-            writer = new FileWriter("src/main/resources/jugador.json");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        // Create your data object
-            Jugador person = this;
-
-            // Convert object to JSON and write to file
-            gson.toJson(person, writer);
-        try {
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        System.out.println("JSON file overwritten successfully!");
 
 
-    }
-    public static boolean existeJugadorCreado(){
-        try {
-            File archivo = new File("src/main/resources/jugador.json");
-            return archivo.exists() && archivo.length() > 0;
-        } catch (Exception e) {
-            return false;
-        }
+    public String getTrabajo(){
+        return trabajo.getTipoTrabajo();
     }
 
 }

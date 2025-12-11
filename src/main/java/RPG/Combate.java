@@ -4,7 +4,7 @@ public class Combate {
     private Jugador jugador;
     private Enemigo enemigo;
     private boolean empiezaJugador;
-    private boolean finCombate;
+    private boolean finCombate = false;
     private boolean victoriaJugador;
     public Combate(Jugador jugador) {
         this.jugador = jugador;
@@ -17,8 +17,9 @@ public class Combate {
 
 
     public void turnoCombate(int accionJugador, int accionEnemigo){
-         if (accionJugador == 0 || accionEnemigo == 0)
+         if (accionJugador == 0 || accionEnemigo == 0){
              return;
+         }
          if (empiezaJugador){
              int damage = jugador.atacar();
              enemigo.calcularDamage(damage);
@@ -63,7 +64,15 @@ public class Combate {
     // isBatleOver
 
 
+    public boolean isEmpiezaJugador() {
+        return empiezaJugador;
+    }
 
+    public boolean getFinCombate() {
+        return finCombate;
+    }
 
-
+    public boolean isVictoriaJugador() {
+        return victoriaJugador;
+    }
 }

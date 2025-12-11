@@ -1,5 +1,7 @@
 package MiniJuego;
 
+import Api.DictionaryApi;
+import Api.DictionaryApiImpl;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -17,6 +19,15 @@ public class Worlde extends MiniJuego{
         private char[] respWordle;
         private String respuesta;
         private String palabraInicialWorlde;
+        private final DictionaryApi dictionaryApi;
+        // necesita limite, yello, isVictoria;
+
+    public Worlde(DictionaryApi dictionaryApi) {
+        super();
+        this.dictionaryApi = dictionaryApi;
+        elegirPalabra();
+    }
+
     public boolean elegirPalabra(){
         Gson gson = new Gson();
         String json = "";
@@ -31,22 +42,38 @@ public class Worlde extends MiniJuego{
     }
 
 
+
     @Override
     public boolean play(){
+        boolean n;
+        do {
+            n = juegoWorlde();
+        }while (!n);
+        System.out.println("The word was " + palabraInicialWorlde);
+        System.out.println("Definition: " + definicionPalabra(palabraInicialWorlde));
+        this.setFinMinijuego(true);
+        return  !isFinMinijuego();
+    }
+
+    public boolean juegoWorlde(){
         // select a random word.
-        String pal = "starship";
-        this.palabra = pal.toLowerCase().toCharArray();
+        this.palabra = palabraInicialWorlde.toLowerCase().toCharArray();
         setRespWordle(palabra.length);
         System.out.println("Word of " +palabra.length + " letters.");
         Scanner tecaldo = new Scanner(System.in);
         // que sea uno, que stenga que escribir separado?
         System.out.println( "Introduzca palabra wordle: ");
         setRespuesta( tecaldo.nextLine()  );
+        if(respuesta.equals("0")){
+            setVictoria(false);
+            return true;
+        }
         char[] respChar = respuesta.toLowerCase().toCharArray();
         arrayToStringWordle(respChar);
         System.out.println(" ");
         if(Arrays.equals(palabra,respChar)){
             System.out.println("Respuesta correcta");
+            setVictoria(true);
             return true;
         }
         if(palabra.length != respChar.length){
@@ -77,6 +104,16 @@ public class Worlde extends MiniJuego{
                 .forEach(element -> System.out.print(element + ", "));
     }
 
+    public String definicionPalabra(String word){
+        String defenicion;
+        try {
+            defenicion = this.dictionaryApi.getPrimeraDefinicion(word);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return defenicion;
+    }
+
     public void setPalabra(char[] palabra) {
         this.palabra = palabra;
     }
@@ -92,4 +129,6 @@ public class Worlde extends MiniJuego{
     public String getPalabraInicialWorlde() {
         return palabraInicialWorlde;
     }
+
+
 }

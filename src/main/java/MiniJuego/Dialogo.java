@@ -13,9 +13,10 @@ public class Dialogo extends MiniJuego{
     private String contexto;
     private String respuesta;
     private String contextoRespuesta;
-    private boolean juegoGanado;
+
 
     public Dialogo(){
+        super();
         Gson gson = new Gson();
         String json = "";
         try {
@@ -51,11 +52,12 @@ public class Dialogo extends MiniJuego{
         try {
             this.respuesta =  gemini1.generateText(contexto2);
         }catch (Exception e){}
-        this.juegoGanado = respuesta.toLowerCase().startsWith("c");
+        this.setVictoria( respuesta.toLowerCase().startsWith("c")   );
         System.out.println(respuesta);
-        System.out.println("Juego Ganado?: " + juegoGanado);
+        System.out.println("Juego Ganado?: " + isVictoria() );
+        this.setFinMinijuego(true);
         //is this answer correct (not counting spelling) in the previous context, don't count similar to "I don't know" or "yes", "no". Anser with one word (correct or incorrect) a line jump and 1 line explaining why
-        return juegoGanado;
+        return isVictoria();
     }
     public String recivirResp(){
         Scanner teclado = new Scanner(System.in);
@@ -70,4 +72,6 @@ public class Dialogo extends MiniJuego{
     public String getContextoRespuesta() {
         return contextoRespuesta;
     }
+
+
 }
