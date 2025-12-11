@@ -20,6 +20,8 @@ public class Combate {
          if (accionJugador == 0 || accionEnemigo == 0){
              return;
          }
+         if (accionEnemigo == 2)
+             System.out.println(enemigo);
          if (empiezaJugador){
              int damage = jugador.atacar();
              enemigo.calcularDamage(damage);

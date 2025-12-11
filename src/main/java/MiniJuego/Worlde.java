@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class Worlde extends MiniJuego{
         private char[] palabra;
@@ -68,6 +69,8 @@ public class Worlde extends MiniJuego{
             setVictoria(false);
             return true;
         }
+        if(respuesta.equals("1") ) {
+            System.out.println(palabraInicialWorlde);}
         char[] respChar = respuesta.toLowerCase().toCharArray();
         arrayToStringWordle(respChar);
         System.out.println(" ");
@@ -80,15 +83,12 @@ public class Worlde extends MiniJuego{
             System.out.println("Palabra largo incorrecto.");
             return false;}
         int n = 0;
-        for (int i = 0;i<palabra.length;i++){
-            if (palabra[i]==respChar[i]){
-                n++;
-                respWordle[i] = 'g';
-            }else {
-                respWordle[i] = 'r';
-            }
-        }
-        // agregar los green grey o amarillos a un array
+        n += (int) IntStream.range(0, palabra.length)
+                .filter(i -> palabra[i] == respChar[i])
+                .count();
+        IntStream.range(0, palabra.length)
+                .forEach(i -> respWordle[i] = (palabra[i] == respChar[i]) ? 'g' : 'r');
+
         System.out.println("Numero de letras acertadas = " + n);
         arrayToStringWordle(respWordle);
 
@@ -103,6 +103,9 @@ public class Worlde extends MiniJuego{
                 .map(e -> "[" + e + "]")
                 .forEach(element -> System.out.print(element + ", "));
     }
+
+
+
 
     public String definicionPalabra(String word){
         String defenicion;

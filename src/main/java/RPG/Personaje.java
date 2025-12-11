@@ -34,6 +34,8 @@ public abstract class Personaje {
     }
     public int calcularDamage(int n){
         double m = n - (defensa*(Math.random()) );
+        if (m<=0)
+            return 0;
         int endDamage = (int) m;
         this.setHpActual( hpActual - endDamage );
         return  endDamage;

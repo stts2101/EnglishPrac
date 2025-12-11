@@ -58,6 +58,11 @@ public class Menu {
         combate.agregarEnemigo(enemigo);
 
         do {
+            System.out.println(enemigo.getHpActual() + "/" + enemigo.getMaxHp());
+            System.out.println(enemigo.getLv());
+            System.out.println("==== vs ====");
+            System.out.println(jugador.getHpActual() + "/" + jugador.getMaxHp());
+            System.out.println(jugador.getLv());
             Scanner teclado = new Scanner(System.in);
             int randomAccionEnemigo = Math.random()<5?1:0;
             System.out.println("Hace una accion. 1. atackar 0. evadir");

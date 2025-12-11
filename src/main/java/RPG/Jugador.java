@@ -14,6 +14,7 @@ public class Jugador extends Personaje {
     private int sgteNivel;
     private Trabajo trabajo;
 
+
     public Jugador() {
         super();
     }

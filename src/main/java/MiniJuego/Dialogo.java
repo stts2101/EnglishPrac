@@ -13,10 +13,12 @@ public class Dialogo extends MiniJuego{
     private String contexto;
     private String respuesta;
     private String contextoRespuesta;
+    private final GeminiTextGenerator geminiGenerator;
 
 
-    public Dialogo(){
+    public Dialogo(GeminiTextGenerator generator){
         super();
+        this.geminiGenerator = generator;
         Gson gson = new Gson();
         String json = "";
         try {
@@ -44,15 +46,23 @@ public class Dialogo extends MiniJuego{
         String toJugador = "";
         try {
             toJugador =  gemini1.generateText(contexto);
-        }catch (Exception e){}
+        }catch (Exception e){
+            this.setFinMinijuego(true);
+            setVictoria(false);
+            return false;
+        }
         System.out.println(toJugador);
         String resp = recivirResp();
         System.out.println(toJugador + "    ====     "+ resp);
-        String contexto2 = "\"" + resp + "\" " + contextoRespuesta;
+        String contexto2 = toJugador + " Respuesta user: \"" + resp + "\" " + contextoRespuesta;
         try {
             this.respuesta =  gemini1.generateText(contexto2);
+            if (this.respuesta != null) {
+                this.setVictoria( this.respuesta.toLowerCase().startsWith("c")  );
+            } else {
+                this.setVictoria(false);
+            }
         }catch (Exception e){}
-        this.setVictoria( respuesta.toLowerCase().startsWith("c")   );
         System.out.println(respuesta);
         System.out.println("Juego Ganado?: " + isVictoria() );
         this.setFinMinijuego(true);

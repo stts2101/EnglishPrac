@@ -18,10 +18,6 @@ public abstract class MiniJuego {
     public void setFinMinijuego(boolean finMinijuego) {
         this.finMinijuego = finMinijuego;
     }
-    public static boolean sjwd(MiniJuego mini1){
-        mini1.play();
-        return true;
-    }
     public boolean isVictoria() {
         return victoria;
     }

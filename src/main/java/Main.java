@@ -1,4 +1,5 @@
 import Api.DictionaryApiImpl;
+import Api.GeminiTextGeneratorImpl;
 import MiniJuego.*;
 import RPG.*;
 import com.google.gson.Gson;
@@ -15,7 +16,7 @@ public class Main {
     public static void main(String[] args) {
         Jugador jugador = Menu.elegirJugador();
         System.out.println(jugador);
-        Enemigo enemigo = new Enemigo("goblino",30,30,3,10,40,30);
+        Enemigo enemigo = new Enemigo("goblino",30,30,3,40,40,30);
 
         Scanner teclado = new Scanner(System.in);
 
@@ -40,7 +41,7 @@ public class Main {
                     Menu.jugarMiniJuego(new Worlde(new DictionaryApiImpl()), jugador);
                     break;
                 case 3:
-                    Menu.jugarMiniJuego(new Dialogo(), jugador);
+                    Menu.jugarMiniJuego(new Dialogo(new GeminiTextGeneratorImpl()), jugador);
                     break;
                 case 0:
                     fin = true;
